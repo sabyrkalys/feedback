@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Генератор отзывов на учеников</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <h1>Генератор отзывов на учеников</h1>
+  <form class="card" onsubmit="generateFeedback(); return false;">
+    <label>Имя ученика:
+      <input type="text" id="name" autocomplete="off">
+    </label>
+    <label>Опоздания:
+      <select id="tardiness">
+        <option value="">—</option>
+        <option value="приходит всегда вовремя">приходит всегда вовремя</option>
+        <option value="иногда опаздывает">иногда опаздывает</option>
+        <option value="постоянно опаздывает">постоянно опаздывает</option>
+      </select>
+    </label>
+    <label>Посещаемость:
+      <select id="attendance">
+        <option value="">—</option>
+        <option value="не пропускает занятия">не пропускает занятия</option>
+        <option value="пропускает занятия редко">пропускает занятия редко</option>
+        <option value="часто пропускает занятия">часто пропускает занятия</option>
+      </select>
+    </label>
+    <label>Успеваемость:
+      <select id="performance">
+        <option value="">—</option>
+        <option value="высокая">высокая</option>
+        <option value="стабильная">стабильная</option>
+        <option value="нестабильная">нестабильная</option>
+        <option value="низкая">низкая</option>
+      </select>
+    </label>
+    <label>Выполнение ДЗ:
+      <select id="hwDone">
+        <option value="">—</option>
+        <option value="сдаёт вовремя домашнее задание">сдаёт вовремя домашнее задание</option>
+        <option value="оттягивает выполнение до последнего">оттягивает выполнение до последнего</option>
+        <option value="делает выборочно домашнее задание">делает выборочно домашнее задание</option>
+        <option value="не выполняет домашнее задание">не выполняет домашнее задание</option>
+      </select>
+    </label>
+    <label>Уровень выполнения ДЗ:
+      <select id="hwQuality">
+        <option value="">—</option>
+        <option value="высокий">высокий</option>
+        <option value="средний">средний</option>
+        <option value="низкий">низкий</option>
+      </select>
+    </label>
+    <label>Активность:
+      <select id="activity">
+        <option value="">—</option>
+        <option value="высокая">высокая</option>
+        <option value="средняя">средняя</option>
+        <option value="низкая">низкая</option>
+      </select>
+    </label>
+    <label>Поведение:
+      <select id="behavior">
+        <option value="">—</option>
+        <option value="внимателен(на), вежлив(а)">внимателен(на), вежлив(а)</option>
+        <option value="часто отвлекается">часто отвлекается</option>
+        <option value="работает в группе">работает в группе</option>
+        <option value="проявляет инициативу">проявляет инициативу</option>
+      </select>
+    </label>
+    <label>Прогресс:
+      <select id="progress">
+        <option value="">—</option>
+        <option value="заметный">заметный</option>
+        <option value="умеренный">умеренный</option>
+        <option value="небольшой">небольшой</option>
+      </select>
+    </label>
+    <label>Темп усвоения материала:
+      <select id="learningPace">
+        <option value="">—</option>
+        <option value="быстрый">быстрый</option>
+        <option value="средний">средний</option>
+        <option value="замедленный">замедленный</option>
+      </select>
+    </label>
+    <label>Самостоятельность:
+      <select id="independence">
+        <option value="">—</option>
+        <option value="высокая">высокая</option>
+        <option value="средняя">средняя</option>
+        <option value="требует поддержки">требует поддержки</option>
+      </select>
+    </label>
+    <label>Вовлечённость в проектную/творческую деятельность:
+      <select id="creativity">
+        <option value="">—</option>
+        <option value="активно участвует">активно участвует</option>
+        <option value="участвует эпизодически">участвует эпизодически</option>
+        <option value="не проявляет интереса">не проявляет интереса</option>
+      </select>
+    </label>
+    <label>Коммуникативные навыки:
+      <select id="communication">
+        <option value="">—</option>
+        <option value="хорошо взаимодействует с одноклассниками">хорошо взаимодействует с одноклассниками</option>
+        <option value="предпочитает работать индивидуально">предпочитает работать индивидуально</option>
+        <option value="испытывает трудности в общении">испытывает трудности в общении</option>
+      </select>
+    </label>
+    <label>Реакция на обратную связь:
+      <select id="feedbackReaction">
+        <option value="">—</option>
+        <option value="принимает и учитывает">принимает и учитывает</option>
+        <option value="частично учитывает">частично учитывает</option>
+        <option value="игнорирует замечания">игнорирует замечания</option>
+      </select>
+    </label>
+    <label>Инициативность:
+      <select id="initiative">
+        <option value="">—</option>
+        <option value="проявляет инициативу">проявляет инициативу</option>
+        <option value="выполняет по заданию">выполняет по заданию</option>
+        <option value="пассивен(на)">пассивен(на)</option>
+      </select>
+    </label>
+    <button type="submit">Сгенерировать отзыв</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function generateFeedback() {
+      const name = document.getElementById("name").value.trim();
+      if (!name) {
+        alert("Пожалуйста, укажите имя ученика!");
+        return;
+      }
+      const activity = document.getElementById("activity").value;
+      const performance = document.getElementById("performance").value;
+      const behavior = document.getElementById("behavior").value;
+      const progress = document.getElementById("progress").value;
+      const tardiness = document.getElementById("tardiness").value;
+      const attendance = document.getElementById("attendance").value;
+      const hwDone = document.getElementById("hwDone").value;
+      const hwQuality = document.getElementById("hwQuality").value;
+      const learningPace = document.getElementById("learningPace").value;
+      const independence = document.getElementById("independence").value;
+      const creativity = document.getElementById("creativity").value;
+      const communication = document.getElementById("communication").value;
+      const feedbackReaction = document.getElementById("feedbackReaction").value;
+      const initiative = document.getElementById("initiative").value;
+
+      const activityPhrases = {
+        "высокая": ["проявил(а) высокую активность", "был(а) очень вовлечён(а)"],
+        "средняя": ["проявил(а) умеренную активность", "участвовал(а) в обсуждениях"],
+        "низкая": ["проявил(а) низкую активность", "редко включался(ась) в работу"]
+      };
+
+      const praisePhrases = [
+        "Отличный прогресс!", "Видна серьёзная работа над собой.",
+        "Продолжай в том же духе!", "Ты на правильном пути!", "Очень радует твой рост!"
+      ];
+
+      const supportPhrases = [
+        "Не сдавайся, у тебя всё получится!", "Важно продолжать стараться — результат придёт.",
+        "С каждым месяцем будет лучше!", "Ты способен(на) на большее — верю в тебя!",
+        "Главное — не останавливаться!"
+      ];
+
+      // Собираем фрагменты отзыва только если они не пустые
+      let parts = [];
+      parts.push(name);
+
+      let activityPhrase = "";
+      if (activity && activityPhrases[activity]) {
+        activityPhrase = activityPhrases[activity][Math.floor(Math.random() * activityPhrases[activity].length)];
+        parts.push(activityPhrase);
+      }
+
+      if (performance) parts.push(`Успеваемость — ${performance}`);
+      if (behavior) parts.push(`Поведение: ${behavior}`);
+      if (progress) parts.push(`Прогресс — ${progress}`);
+      if (tardiness) parts.push(`Опоздания: ${tardiness}`);
+      if (attendance) parts.push(`Посещаемость: ${attendance}`);
+      if (hwDone) parts.push(`Домашние задания: ${hwDone}`);
+      if (hwQuality) parts.push(`уровень выполнения — ${hwQuality}`);
+      if (learningPace) parts.push(`Темп усвоения материала — ${learningPace}`);
+      if (independence) parts.push(`Самостоятельность — ${independence}`);
+      if (creativity) parts.push(`Вовлечённость в проектную/творческую деятельность — ${creativity}`);
+      if (communication) parts.push(`Коммуникативные навыки — ${communication}`);
+      if (feedbackReaction) parts.push(`Реакция на обратную связь — ${feedbackReaction}`);
+      if (initiative) parts.push(`Инициативность — ${initiative}`);
+
+      let ending = "";
+      if (progress === "заметный") {
+        ending = praisePhrases[Math.floor(Math.random() * praisePhrases.length)];
+      } else if (progress) {
+        ending = supportPhrases[Math.floor(Math.random() * supportPhrases.length)];
+      }
+      if (ending) parts.push(ending);
+
+      const feedback = parts.join(". ") + (parts.length ? "." : "");
+
+      document.getElementById("result").innerText = feedback;
+    }
+  </script>
+
+</body>
+</html>

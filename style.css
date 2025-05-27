@@ -1,0 +1,152 @@
+:root {
+      --primary-bg: #f8fafc;
+      --card-bg: #fff;
+      --accent: #6366f1;
+      --accent-hover: #4f46e5;
+      --input-bg: #f1f5f9;
+      --text: #0f172a;
+      --label: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 2px 16px rgba(100, 116, 139, 0.08);
+      --radius: 14px;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--primary-bg);
+      color: var(--text);
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      font-size: 16px;
+      min-height: 100vh;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      color: var(--accent-hover);
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px 20px 18px 20px;
+      width: 100%;
+      max-width: 430px;
+      margin: 24px 0 0 0;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    label {
+      color: var(--label);
+      font-weight: 500;
+      font-size: 1rem;
+      margin-bottom: 3px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    input[type="text"], select {
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 11px 13px;
+      font-size: 1rem;
+      color: var(--text);
+      transition: border 0.2s;
+      outline: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus, select:focus {
+      border: 1.5px solid var(--accent);
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 6px;
+      transition: background 0.18s, box-shadow 0.18s;
+      width: 100%;
+      box-shadow: 0 2px 8px #6366f11a;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+    }
+
+    button:hover, button:focus {
+      background: var(--accent-hover);
+    }
+
+    #result {
+      margin-top: 20px;
+      background: var(--input-bg);
+      color: var(--text);
+      padding: 18px 14px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      min-height: 70px;
+      font-size: 1.06rem;
+      line-height: 1.55;
+      word-break: break-word;
+      max-width: 430px;
+      width: 100%;
+      box-sizing: border-box;
+      letter-spacing: 0.01em;
+    }
+
+    @media (max-width: 700px) {
+      .card, #result {
+        max-width: 97vw;
+        padding-left: 4vw;
+        padding-right: 4vw;
+      }
+      body {
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 499px) {
+      h1 {
+        font-size: 1.15rem;
+        margin-top: 14px;
+        margin-bottom: 12px;
+      }
+      .card, #result {
+        max-width: 99vw;
+        padding: 10px 2vw 12px 2vw;
+      }
+      label {
+        font-size: 0.97rem;
+      }
+      input[type="text"], select {
+        font-size: 0.97rem;
+        padding: 9px 9px;
+      }
+      button {
+        font-size: 1rem;
+        padding: 11px 0;
+      }
+    }
